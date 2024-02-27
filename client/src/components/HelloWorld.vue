@@ -47,6 +47,7 @@
 </template>
 
 <script setup lang="ts">
+import axios from 'axios'
 import { ref, computed } from 'vue'
 
 type Item = {
@@ -107,6 +108,19 @@ const listTwo = computed(() => {
 const listThree = computed(() => {
   return items.value.filter((item) => item.list === 3)
 })
+
+const fetchTestData = async () => {
+  try {
+    const response = await axios.get('http://127.0.0.1:8000/hello/')
+
+    console.log('Data:', response.data)
+  } catch (error) {
+    console.error('Error fetching data:', error.message)
+  }
+}
+
+fetchTestData()
+
 </script>
 
 <style scoped>
