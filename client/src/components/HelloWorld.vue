@@ -32,13 +32,22 @@
         {{ item.title }}
       </div>
     </div>
+
+    <div 
+      v-for="item in listThree" 
+      :key="item.id" 
+      class="drag-el"
+      :draggable="true"
+      @dragstart="startDrag($event, item)"
+    >
+      {{ item.title }}
+    </div>
   </div>
+  {{ items }}
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-
-defineProps<{ msg: string }>()
 
 type Item = {
   id: number,
@@ -62,6 +71,11 @@ const items = ref([
     title: 'Item C',
     list: 2,
   },
+  {
+    id: 3,
+    title: 'Stays Put!!',
+    list: 3,
+  },
 ])
 
 const startDrag = (event: any, item: Item) => {
@@ -72,8 +86,16 @@ const startDrag = (event: any, item: Item) => {
 
 const onDrop = (event: any, list: Item['list']) => {
   const itemID = event.dataTransfer.getData('itemID')
-  const item = items.value.find((item) => item.id == itemID)
-  if (item) item.list = list
+  const itemIndex = items.value.findIndex((item) => item.id == itemID)
+  if (itemIndex === -1) throw new Error('Dragging failed: Item not found')
+
+  const item = items.value[itemIndex]
+  if (item.list !== 3) {
+    item.list = list
+  } else {
+    const newItem = { ...item, id: Math.floor(Math.random()*100), list }
+    items.value.push(newItem)
+  }
 }
 
 const listOne = computed(() => {
@@ -81,6 +103,9 @@ const listOne = computed(() => {
 })
 const listTwo = computed(() => {
   return items.value.filter((item) => item.list === 2)
+})
+const listThree = computed(() => {
+  return items.value.filter((item) => item.list === 3)
 })
 </script>
 
