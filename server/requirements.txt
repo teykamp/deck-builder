@@ -13,3 +13,4 @@ pylint-django==2.5.5
 pylint-plugin-utils==0.8.2
 sqlparse==0.4.4
 tomlkit==0.12.3
+sqlparse==0.4.4
