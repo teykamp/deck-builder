@@ -1,5 +1,5 @@
 <template>
-  <div class="flex mx-5 mt-96">
+   <div class="flex mx-5 mt-96">
     Drag and Drop
     <div 
       class="drop-zone mx-5 pa-12 w-96"
@@ -46,9 +46,10 @@
   </div>
 </template>
 
+
 <script setup lang="ts">
-import axios from 'axios'
 import { ref, computed } from 'vue'
+// import axios from 'axios'
 
 type Item = {
   id: number,
@@ -94,7 +95,7 @@ const onDrop = (event: any, list: Item['list']) => {
   if (item.list !== 3) {
     item.list = list
   } else {
-    const newItem = { ...item, id: Math.floor(Math.random()*100), list }
+    const newItem = { ...item, id: Math.floor(Math.random() * 100), list }
     items.value.push(newItem)
   }
 }
