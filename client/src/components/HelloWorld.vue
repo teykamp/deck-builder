@@ -5,15 +5,23 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Button } from './ui/button'
+import { Button } from '@/components/ui/button'
+
+import axios from 'axios'
 
 defineProps<{ msg: string }>()
 
 const count = ref(0)
-</script>
 
-<style scoped>
-.read-the-docs {
-  color: #888;
+const fetchTestData = async () => {
+  try {
+    const response = await axios.get('http://127.0.0.1:8000/hello/')
+
+    console.log('Data:', response.data)
+  } catch (error) {
+    console.error('Error fetching data:', error.message)
+  }
 }
-</style>
+
+fetchTestData()
+</script>
