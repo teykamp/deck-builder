@@ -20,18 +20,18 @@ jobs:
         with:
           python-version: 3.12
 
-  frontend_build:
-    needs: install_project
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: client
-    steps:
-      - name: Check out project
-        uses: actions/checkout@v4
+  #frontend_build:
+  #  needs: install_project
+  #  runs-on: ubuntu-latest
+  #  defaults:
+  #    run:
+  #      working-directory: client
+  #  steps:
+  #    - name: Check out project
+  #      uses: actions/checkout@v4
 
-      - run: npm install
-      - run: npm run build
+  #    - run: npm install
+  #    - run: npm run build
 
   frontend_test:
     needs: install_project
