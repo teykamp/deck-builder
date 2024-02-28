@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [master, ci]
+  pull_request:
+    branches: [master, ci]
+
+
+jobs:
+  install_project:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Install node v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Install python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+
+  frontend_build:
+    needs: install_project
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v4
+
+      - run: npm install
+      - run: npm run build
+
+  backend_lint:
+    needs: install_project
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v4
+
+      - run: python -m venv deckbuilder_venv
+      - run: source deckbuilder_venv/bin/activate
+      - run: pip install -r requirements.txt
+      - run: pylint --load-plugins pylint_django --django-settings-module=project.settings project ; test $? -eq 0
+
+  backend_tests:
+    needs: install_project
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v4
+
+      - run: python -m venv deckbuilder_venv
+      - run: source deckbuilder_venv/bin/activate
+      - run: pip install -r requirements.txt
+      - run: python manage.py test ; test $? -eq 0
