@@ -9,7 +9,7 @@ on:
 
 jobs:
   install_project:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Install node v20
         uses: actions/setup-node@v4
@@ -23,7 +23,7 @@ jobs:
 
   frontend_build:
     needs: install_project
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: client
@@ -33,6 +33,19 @@ jobs:
 
       - run: npm install
       - run: npm run build
+
+  frontend_test:
+    needs: install_project
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v4
+
+      - run: npm install
+      - run: npm run test
 
   backend_lint:
     needs: install_project
