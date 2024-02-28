@@ -1,5 +1,6 @@
 <template>
   <div class="flex mx-5 mt-96">
+    Drag and Drop
     <div 
       class="drop-zone mx-5 pa-12 w-96"
       @drop="onDrop($event, 1)"
@@ -43,7 +44,6 @@
       {{ item.title }}
     </div>
   </div>
-  {{ items }}
 </template>
 
 <script setup lang="ts">
@@ -115,7 +115,7 @@ const fetchTestData = async () => {
 
     console.log('Data:', response.data)
   } catch (error) {
-    console.error('Error fetching data:', error.message)
+    console.error('Error fetching data:', error)
   }
 }
 
