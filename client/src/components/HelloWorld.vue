@@ -115,7 +115,7 @@ const fetchTestData = async () => {
 
     console.log('Data:', response.data)
   } catch (error) {
-    console.error('Error fetching data:', error.message)
+    console.error('Error fetching data:', error)
   }
 }
 
