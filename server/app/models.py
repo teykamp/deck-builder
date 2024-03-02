@@ -37,8 +37,8 @@ class YugiohDeckCard(models.Model):
         EXTRA = "E"
         SIDE = "S"
 
-    deck = models.ForeignKey(Deck, on_delete=models.CASCADE)
-    card = models.ForeignKey(Card, on_delete=models.CASCADE)
+    deck = models.ForeignKey(YugiohDeck, on_delete=models.CASCADE)
+    card = models.ForeignKey(YugiohCard, on_delete=models.CASCADE)
 
 
 class YugiohFormat(models.Model):
