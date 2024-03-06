@@ -1,10 +1,6 @@
 # Initial Setup
 We are using python3.12. Ensure you have this version installed.
-```bash
-# Steps to install if python3.12 not present are TDB
-```
-
-Requires the packages `python3-django python3.12-venv python3.12-pip` installed on the system
+Requires the packages `python3.12-venv python3.12-pip` installed on the system on Debian
 
 Create your virtual environment and activate it with:
 ```bash
@@ -26,3 +22,18 @@ python manage.py runserver
 ```
 
 Once the server is running, navigate to `https://127.0.0.1:8000/hello` in a browser for 'hello world'.
+
+The database access relies on several environment variables set. Create a `.env` file and add the contents:
+```bash
+DB_NAME='<db name>'
+DB_USER='<db user>'
+DB_PASS='<db pass>'
+DB_HOST='<db host>'
+DB_PORT='<db port>'
+```
+
+Then update your shells environment variables with:
+```bash
+source .env
+```
+Verify the variables are present with: `echo $DB_NAME`
