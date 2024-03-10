@@ -25,11 +25,11 @@ Once the server is running, navigate to `https://127.0.0.1:8000/hello` in a brow
 
 The database access relies on several environment variables set. Create a `.env` file and add the contents:
 ```bash
-DB_NAME='<db name>'
-DB_USER='<db user>'
-DB_PASS='<db pass>'
-DB_HOST='<db host>'
-DB_PORT='<db port>'
+export DB_NAME='<db name>'
+export DB_USER='<db user>'
+export DB_PASS='<db pass>'
+export DB_HOST='<db host>'
+export DB_PORT='<db port>'
 ```
 
 Then update your shells environment variables with:

@@ -8,6 +8,12 @@ on:
 
 jobs:
   install_project:
+    env:
+      DB_NAME: ${{ secrets.DB_NAME }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASS: ${{ secrets.DB_PASS }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_PORT: ${{ secrets.DB_PORT }}
     runs-on: ubuntu-latest
     steps:
       - name: Install node v20
@@ -56,10 +62,11 @@ jobs:
       - name: Check out project
         uses: actions/checkout@v4
 
-      - run: python -m venv deckbuilder_venv
-      - run: source deckbuilder_venv/bin/activate
-      - run: pip install -r requirements.txt
-      - run: pylint --load-plugins pylint_django --django-settings-module=project.settings project ; test $? -eq 0
+      - run: |
+          python -m venv deckbuilder_venv
+          source deckbuilder_venv/bin/activate
+          pip install -r requirements.txt
+          pylint --load-plugins pylint_django --django-settings-module=project.settings project ; test $? -eq 0
 
   backend_tests:
     needs: install_project
@@ -71,7 +78,8 @@ jobs:
       - name: Check out project
         uses: actions/checkout@v4
 
-      - run: python -m venv deckbuilder_venv
-      - run: source deckbuilder_venv/bin/activate
-      - run: pip install -r requirements.txt
-      - run: python manage.py test ; test $? -eq 0
+      - run: |
+          python -m venv deckbuilder_venv
+          source deckbuilder_venv/bin/activate
+          pip install -r requirements.txt
+          python manage.py test ; test $? -eq 0
