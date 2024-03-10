@@ -23,4 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 
-env
+.idea
+*venv*
+*.swo
+*.swp
+
+*.env

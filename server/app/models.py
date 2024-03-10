@@ -1,9 +1,24 @@
 from django.conf import settings
 from django.db import models
 
+class HelloModel(models.Model):
+    id = models.IntegerField(primary_key=True)
+    content = models.CharField(max_length=64)
+    def __str__(self):
+        return self.content
 
 class Card(models.Model):
-    pass
+    id = models.IntegerField(primary_key=True)
+    type = models.CharField(max_length=32)
+    name = models.CharField(max_length=64)
+    englishAttribute = models.CharField(max_length=32)
+    localizedAttribute = models.CharField(max_length=32)
+    effectText = models.CharField(max_length=512)
+    level = models.IntegerField()
+    attack = models.IntegerField()
+    defense = models.IntegerField()
+    properties = models.JSONField() # JSON list of strings containing the properties
+    status = models.IntegerField()
 
 
 class Deck(models.Model):
