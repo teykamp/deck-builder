@@ -5,7 +5,9 @@ Requires the packages `python3.12-venv python3.12-pip` installed on the system o
 Create your virtual environment and activate it with:
 ```bash
 python3.12 -m venv venv
-source deckbuilder_venv/bin/activate
+
+source venv/bin/activate        # If on *nix
+source venv/Scripts/activate    # If on Windows
 
 # At any time to exit, you can type:
 deactivate
@@ -15,13 +17,6 @@ Install project depenendencies:
 ```bash
 pip install -r requirements.txt
 ```
-
-Start the project, after setup is complete, by running:
-```bash
-python manage.py runserver
-```
-
-Once the server is running, navigate to `https://127.0.0.1:8000/hello` in a browser for 'hello world'.
 
 The database access relies on several environment variables set. Create a `.env` file and add the contents:
 ```bash
@@ -37,3 +32,11 @@ Then update your shells environment variables with:
 source .env
 ```
 Verify the variables are present with: `echo $DB_NAME`
+
+
+Start the project, after setup is complete, by running:
+```bash
+python manage.py runserver
+```
+
+Once the server is running, navigate to `https://127.0.0.1:8000` in a browser to test the application.
