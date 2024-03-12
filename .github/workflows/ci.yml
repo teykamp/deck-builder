@@ -43,8 +43,13 @@ jobs:
       - name: Check out project
         uses: actions/checkout@v4
 
-      - run: npm install
-      - run: npm run test
+      - name: Configure project
+        run: |
+          npm install
+
+      - name: Run tests
+        run: |
+          npm run test
 
   backend_lint:
     needs: install_project
@@ -56,14 +61,26 @@ jobs:
       - name: Check out project
         uses: actions/checkout@v4
 
-      - run: python -m venv deckbuilder_venv
-      - run: source deckbuilder_venv/bin/activate
-      - run: pip install -r requirements.txt
-      - run: pylint --load-plugins pylint_django --django-settings-module=project.settings project ; test $? -eq 0
+      - name: Configure project
+        run: |
+          python -m venv deckbuilder_venv
+          source deckbuilder_venv/bin/activate
+          pip install -r requirements.txt
+
+      - name: Run linter
+        run: |
+          source deckbuilder_venv/bin/activate
+          pylint --load-plugins pylint_django --django-settings-module=project.settings project ; test $? -eq 0
 
   backend_tests:
     needs: install_project
     runs-on: ubuntu-22.04
+    env:
+      DB_NAME: ${{ secrets.DB_NAME }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASS: ${{ secrets.DB_PASS }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_PORT: ${{ secrets.DB_PORT }}
     defaults:
       run:
         working-directory: server
@@ -71,7 +88,15 @@ jobs:
       - name: Check out project
         uses: actions/checkout@v4
 
-      - run: python -m venv deckbuilder_venv
-      - run: source deckbuilder_venv/bin/activate
-      - run: pip install -r requirements.txt
-      - run: python manage.py test ; test $? -eq 0
+      - run: echo $DB_NAME
+
+      - name: Configure project
+        run: |
+          python -m venv deckbuilder_venv
+          source deckbuilder_venv/bin/activate
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          source deckbuilder_venv/bin/activate
+          python manage.py test ; test $? -eq 0
