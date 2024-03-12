@@ -22,6 +22,7 @@ Don't use semicolons unless required (i.e. a for loop).
 Avoid nested if statements. Prefer returning out of function when possible.
 Create types where possible. Prefer unions and using existing types. Do not declare types where they can be inferred unless initializing a variable to `null`. Initialize variables to `null` instead of `undefined`.
 Prefer longer names to avoid comments. Make code self-evident wherever possible.
+2 spaces for indentation rather than tabs
 
 ## Commands
 `npm run dev` - start development server
