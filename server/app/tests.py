@@ -13,7 +13,7 @@ class SingleCardTestCase(TestCase):
                             attack=2300,
                             defense=1400,
                             properties=['Fairy', 'Fusion', 'Effect'],
-                            status='Unlimited')
+                            status=3)
 
     def test_card_exists(self):
         card = Card.objects.get(id=10000)
