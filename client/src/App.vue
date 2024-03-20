@@ -1,7 +1,9 @@
 <template>
-  <HelloWorld />
+  {{ breakPoint }}
 </template>
 
 <script setup lang="ts">
-import HelloWorld from '@/components/HelloWorld.vue'
+import useScreenSize from '@/composables/useDisplaySize'
+
+const { breakPoint } = useScreenSize()
 </script>
