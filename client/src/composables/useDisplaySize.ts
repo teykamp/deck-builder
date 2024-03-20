@@ -3,21 +3,25 @@ import { ref, watchEffect, onMounted } from 'vue'
 export default function useScreenSize() {
     const screenWidth = ref(window.innerWidth)
     const screenHeight = ref(window.innerHeight)
-    const breakPoint = ref<'xs' | 'sm' | 'md' | 'lg' | 'xl' | null>(null)
+    const xl = ref(false)
+    const lg = ref(false)
+    const md = ref(false)
+    const sm = ref(false)
+    const xs = ref(false)
 
     const updateScreenSize = () => {
         screenWidth.value = window.innerWidth
         screenHeight.value = window.innerHeight
         if (screenWidth.value < 600) {
-            breakPoint.value = 'xs'
+            xs.value = true
         } else if (screenWidth.value < 960) {
-            breakPoint.value = 'sm'
+            sm.value = true
         } else if (screenWidth.value < 1264) {
-            breakPoint.value = 'md'
+            md.value = true
         } else if (screenWidth.value < 1904) {
-            breakPoint.value = 'lg'
+            lg.value = true
         } else {
-            breakPoint.value = 'xl'
+            xl.value = true
         }
     }
 
@@ -32,7 +36,11 @@ export default function useScreenSize() {
     onMounted(() => updateScreenSize())
 
     return {
-        breakPoint,
+        xs,
+        sm,
+        md,
+        lg,
+        xl,
         screenWidth,
         screenHeight
     }
