@@ -38,15 +38,18 @@
       v-for="item in listThree" 
       :key="item.id" 
       class="drag-el"
+      style="height: 100%;"
       :draggable="true"
       @dragstart="startDrag($event, item)"
     >
-      {{ item.title }}
+      <TestCard />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import TestCard from '@/components/TestCard.vue'
+
 import axios from 'axios'
 import { ref, computed } from 'vue'
 
@@ -74,6 +77,21 @@ const items = ref([
   },
   {
     id: 3,
+    title: 'Stays Put!!',
+    list: 3,
+  },
+  {
+    id: 4,
+    title: 'Stays Put!!',
+    list: 3,
+  },
+  {
+    id: 5,
+    title: 'Stays Put!!',
+    list: 3,
+  },
+  {
+    id: 6,
     title: 'Stays Put!!',
     list: 3,
   },
@@ -120,7 +138,6 @@ const fetchTestData = async () => {
 }
 
 fetchTestData()
-
 </script>
 
 <style scoped>
