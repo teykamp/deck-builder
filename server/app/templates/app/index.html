@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Deck Builder Test Template</title>
+    </head>
+    <body>
+        <img src="{{ image }}" />
+        <p>ID: {{ id }}</p>
+        <p>type: {{ type }}</p>
+        <p>name: {{ name}}</p>
+        <p>effectText: {{ effectText }}</p>
+        <p>englishAttribute: {{ englishAttribute }}</p>
+        <p>localizedAttribute: {{ localizedAttribute }}</p>
+        <p>level: {{ level }}</p>
+        <p>attack: {{ attack }}</p>
+        <p>defense: {{ defense}}</p>
+        <p>status: {{ status}}</p>
+        <p>properties:
+        <ul>
+            {% for p in properties %}
+            <li>{{ p }}</li>
+            {% endfor %}
+
+        </ul>
+        </p>
+    </body>
+</html>

@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
-    path('hello', views.hellodb),
-    path('hello/', views.hellodb),
+    path('testcard/', views.testcard),
+    path('testcard', views.testcard),
+    path('testcard/<int:card_id>', views.yugiohcard),
 ]
