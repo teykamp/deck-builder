@@ -28,3 +28,6 @@ Prefer longer names to avoid comments. Make code self-evident wherever possible.
 `npm run dev` - start development server
 `npm run test` - run tests
 `npm run build` build to dist
+
+## Testing
+We test both components and functions. Please write adequate tests for component actions and state and for checking functions where necessary. The development style is to write tests afterwards instead of test-driven-development, however you are free to write code how you please.
